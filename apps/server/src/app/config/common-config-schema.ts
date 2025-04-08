@@ -27,6 +27,8 @@ const commonConfigSchema = {
 
 const cloudConfigSchema = {
   SENDGRID_API_KEY: Joi.string().required(),
+  SENDGRID_FROM_EMAIL: Joi.string().required(),
+  SENDGRID_TEMPLATE_ID: Joi.string().required(),
   SEGMENT_KEY: Joi.string().required(),
   GOOGLE_OAUTH_CLIENT_ID: Joi.string().required(),
   GOOGLE_OAUTH_CLIENT_SECRET: Joi.string().required(),

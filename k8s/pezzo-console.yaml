@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pezzo-console
+  namespace: pezzo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pezzo-console
+  template:
+    metadata:
+      labels:
+        app: pezzo-console
+    spec:
+      containers:
+      - name: pezzo-console
+        image: ghcr.io/pezzolabs/pezzo/console:latest
+        # Alternatively, you can use the build context from the original docker-compose
+        # You would need to build and push this image to a registry first
+        ports:
+        - containerPort: 8080
+        env:
+        - name: NX_BASE_API_URL
+          value: "https://api.pezzo.sentencelabs.ai"
+        - name: NX_SUPERTOKENS_API_DOMAIN
+          value: "https://api.pezzo.sentencelabs.ai"
+        - name: NX_SUPERTOKENS_WEBSITE_DOMAIN
+          value: "https://pezzo.sentencelabs.ai"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pezzo-console
+  namespace: pezzo
+spec:
+  selector:
+    app: pezzo-console
+  ports:
+  - port: 8080
+    targetPort: 8080 

@@ -1,0 +1,16 @@
+# apiVersion: batch/v1
+# kind: Job
+# metadata:
+#   name: create-pezzo-db
+#   namespace: pezzo
+# spec:
+#   template:
+#     spec:
+#       containers:
+#       - name: create-db
+#         image: postgres:15-alpine3.17
+#         command: ['sh', '-c', 'until pg_isready -h postgres -U postgres; do sleep 2; done && echo "CREATE DATABASE pezzo;" | PGPASSWORD=postgres psql -h postgres -U postgres']
+#         env:
+#         - name: PGPASSWORD
+#           value: postgres
+#       restartPolicy: OnFailure 

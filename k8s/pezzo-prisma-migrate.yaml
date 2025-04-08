@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: pezzo-prisma-migrate
+  namespace: pezzo
+spec:
+  template:
+    spec:
+      containers:
+      - name: pezzo-prisma-migrate
+        image: ghcr.io/pezzolabs/pezzo/server:latest
+        # Alternatively, you can use the build context from the original docker-compose
+        # You would need to build and push this image to a registry first
+        command: ["/bin/sh", "-c", "npx prisma migrate deploy"]
+        env:
+        - name: DATABASE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: pezzo-config
+              key: DATABASE_URL
+      restartPolicy: OnFailure 

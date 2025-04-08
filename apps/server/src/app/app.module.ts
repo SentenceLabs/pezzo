@@ -26,6 +26,7 @@ import { CacheModule } from "./cache/cache.module";
 import { RedisModule } from "./redis/redis.module";
 import { EncryptionModule } from "./encryption/encryption.module";
 import { ClickhHouseModule } from "./clickhouse/clickhouse.module";
+import { NotificationsService } from './notifications/notifications.service';
 
 const isCloud = process.env.PEZZO_CLOUD === "true";
 
@@ -44,7 +45,9 @@ const isCloud = process.env.PEZZO_CLOUD === "true";
     ClickhHouseModule,
     RedisModule,
     EncryptionModule,
-    EventEmitterModule.forRoot(),
+    EventEmitterModule.forRoot({
+      global: true,
+    }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       playground: false,
@@ -75,7 +78,7 @@ const isCloud = process.env.PEZZO_CLOUD === "true";
     IdentityModule,
     MetricsModule,
     ReportingModule,
-    ...(isCloud ? [NotificationsModule] : []),
+    NotificationsModule,
     ClsModule,
     CacheModule,
   ],

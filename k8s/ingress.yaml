@@ -1,0 +1,47 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: pezzo-ingress
+  namespace: pezzo
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - pezzo.sentencelabs.ai
+        - api.pezzo.sentencelabs.ai
+        - proxy.pezzo.sentencelabs.ai
+      secretName: pezzo-tls
+  
+  rules:
+    - host: pezzo.sentencelabs.ai  # Replace with your domain
+      http:
+        paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: pezzo-console
+              port:
+                number: 8080
+    - host: api.pezzo.sentencelabs.ai  # Replace with your domain
+      http:
+        paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: pezzo-server
+              port:
+                number: 3000
+    - host: proxy.pezzo.sentencelabs.ai  # Replace with your domain
+      http:
+        paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: pezzo-proxy
+              port:
+                number: 3000 

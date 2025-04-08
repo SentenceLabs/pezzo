@@ -113,7 +113,7 @@ export class OrgInvitationsResolver {
 
     this.logger
       .assign({ topic })
-      .info("Sending kafka invitation created event");
+      .info("Sending kafka invitation created event ANOOP");
 
     const payload: KafkaSchemas["org-invitation-created"] = {
       key: invitation.id,
@@ -125,7 +125,9 @@ export class OrgInvitationsResolver {
       role: invitation.role,
     };
 
+    this.logger.assign({ payload }).info("About to emit org-invitation-created event");
     this.eventEmitter.emit("org-invitation-created", payload);
+    this.logger.info("Event emitted");
 
     return invitation;
   }

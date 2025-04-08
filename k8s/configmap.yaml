@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pezzo-config
+  namespace: pezzo
+data:
+  CLICKHOUSE_HOST: "clickhouse"
+  CLICKHOUSE_PORT: "8123"
+  CLICKHOUSE_USER: "default"
+  CLICKHOUSE_PASSWORD: "default"
+  SUPERTOKENS_CONNECTION_URI: "http://supertokens:3567"
+  REDIS_URL: "redis://redis-stack-server:6379"
+  KMS_LOCAL_ENDPOINT: "http://local-kms:9981"
+  DATABASE_URL: "postgresql://postgres:postgres@postgres:5432/pezzo"
+  CLICKHOUSE_URL: "http://clickhouse:8123"
+  CONSOLE_HOST: "https://pezzo.sentencelabs.ai"
+  PEZZO_CLOUD: "true"

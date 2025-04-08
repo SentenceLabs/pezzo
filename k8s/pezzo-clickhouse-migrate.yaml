@@ -1,0 +1,37 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: pezzo-clickhouse-migrate
+  namespace: pezzo
+spec:
+  template:
+    spec:
+      containers:
+      - name: pezzo-clickhouse-migrate
+        image: ghcr.io/pezzolabs/pezzo/server:latest
+        # Alternatively, you can use the build context from the original docker-compose
+        # You would need to build and push this image to a registry first
+        workingDir: /app/clickhouse
+        command: ["/bin/sh", "-c", "./migrate.sh"]
+        env:
+        - name: CLICKHOUSE_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: pezzo-config
+              key: CLICKHOUSE_HOST
+        - name: CLICKHOUSE_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: pezzo-config
+              key: CLICKHOUSE_PORT
+        - name: CLICKHOUSE_USER
+          valueFrom:
+            configMapKeyRef:
+              name: pezzo-config
+              key: CLICKHOUSE_USER
+        - name: CLICKHOUSE_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              name: pezzo-config
+              key: CLICKHOUSE_PASSWORD
+      restartPolicy: OnFailure 
