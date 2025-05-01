@@ -1,87 +1,87 @@
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: clickhouse
-  namespace: pezzo
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: clickhouse
-  template:
-    metadata:
-      labels:
-        app: clickhouse
-    spec:
-      containers:
-      - name: clickhouse
-        image: clickhouse/clickhouse-server:23-alpine
-        ports:
-        - containerPort: 8123
-        - containerPort: 9000
-        - containerPort: 9004
-        env:
-        - name: CLICKHOUSE_USER
-          value: default
-        - name: CLICKHOUSE_PASSWORD
-          value: default
-        volumeMounts:
-        - name: clickhouse-data
-          mountPath: /var/lib/clickhouse
-        - name: clickhouse-logs
-          mountPath: /var/log/clickhouse-server
-        - name: clickhouse-users-config
-          mountPath: /etc/clickhouse-server/users.d/config.xml
-          subPath: config.xml
-        - name: clickhouse-server-config
-          mountPath: /etc/clickhouse-server/config.d/config.xml
-          subPath: config.xml
-        readinessProbe:
-          exec:
-            command:
-            - clickhouse-client
-            - --query
-            - SELECT 1
-          initialDelaySeconds: 5
-          periodSeconds: 5
-      volumes:
-      - name: clickhouse-data
-        persistentVolumeClaim:
-          claimName: clickhouse-data
-      - name: clickhouse-logs
-        persistentVolumeClaim:
-          claimName: clickhouse-logs
-      - name: clickhouse-users-config
-        configMap:
-          name: clickhouse-users-config
-      - name: clickhouse-server-config
-        configMap:
-          name: clickhouse-server-config
-      tolerations:
-        - key: kubernetes.azure.com/scalesetpriority
-          operator: Equal
-          value: spot
-          effect: NoSchedule
-        - key: kubernetes.azure.com/CriticalAddonsOnly
-          operator: Equal
-          value: "true"
-          effect: NoSchedule
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: clickhouse
-  namespace: pezzo
-spec:
-  selector:
-    app: clickhouse
-  ports:
-  - name: http
-    port: 8123
-    targetPort: 8123
-  - name: native
-    port: 9000
-    targetPort: 9000
-  - name: tcp
-    port: 9004
-    targetPort: 9004 
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: clickhouse
+#   namespace: pezzo
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: clickhouse
+#   template:
+#     metadata:
+#       labels:
+#         app: clickhouse
+#     spec:
+#       containers:
+#       - name: clickhouse
+#         image: clickhouse/clickhouse-server:23-alpine
+#         ports:
+#         - containerPort: 8123
+#         - containerPort: 9000
+#         - containerPort: 9004
+#         env:
+#         - name: CLICKHOUSE_USER
+#           value: default
+#         - name: CLICKHOUSE_PASSWORD
+#           value: default
+#         volumeMounts:
+#         - name: clickhouse-data
+#           mountPath: /var/lib/clickhouse
+#         - name: clickhouse-logs
+#           mountPath: /var/log/clickhouse-server
+#         - name: clickhouse-users-config
+#           mountPath: /etc/clickhouse-server/users.d/config.xml
+#           subPath: config.xml
+#         - name: clickhouse-server-config
+#           mountPath: /etc/clickhouse-server/config.d/config.xml
+#           subPath: config.xml
+#         readinessProbe:
+#           exec:
+#             command:
+#             - clickhouse-client
+#             - --query
+#             - SELECT 1
+#           initialDelaySeconds: 5
+#           periodSeconds: 5
+#       volumes:
+#       - name: clickhouse-data
+#         persistentVolumeClaim:
+#           claimName: clickhouse-data
+#       - name: clickhouse-logs
+#         persistentVolumeClaim:
+#           claimName: clickhouse-logs
+#       - name: clickhouse-users-config
+#         configMap:
+#           name: clickhouse-users-config
+#       - name: clickhouse-server-config
+#         configMap:
+#           name: clickhouse-server-config
+#       tolerations:
+#         - key: kubernetes.azure.com/scalesetpriority
+#           operator: Equal
+#           value: spot
+#           effect: NoSchedule
+#         - key: CriticalAddonsOnly
+#           operator: Equal
+#           value: "true"
+#           effect: NoSchedule
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: clickhouse
+#   namespace: pezzo
+# spec:
+#   selector:
+#     app: clickhouse
+#   ports:
+#   - name: http
+#     port: 8123
+#     targetPort: 8123
+#   - name: native
+#     port: 9000
+#     targetPort: 9000
+#   - name: tcp
+#     port: 9004
+#     targetPort: 9004 

@@ -1,33 +1,33 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: clickhouse-users-config
-  namespace: pezzo
-data:
-  config.xml: |
-    <yandex>
-        <users>
-            <default>
-                <password>default</password>
-                <networks>
-                    <ip>::/0</ip>
-                </networks>
-                <profile>default</profile>
-                <quota>default</quota>
-            </default>
-        </users>
-    </yandex>
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: clickhouse-server-config
-  namespace: pezzo
-data:
-  config.xml: |
-    <yandex>
-        <listen_host>0.0.0.0</listen_host>
-        <http_port>8123</http_port>
-        <tcp_port>9000</tcp_port>
-        <interserver_http_port>9009</interserver_http_port>
-    </yandex> 
+# apiVersion: v1
+# kind: ConfigMap
+# metadata:
+#   name: clickhouse-users-config
+#   namespace: pezzo
+# data:
+#   config.xml: |
+#     <yandex>
+#         <users>
+#             <default>
+#                 <password>default</password>
+#                 <networks>
+#                     <ip>::/0</ip>
+#                 </networks>
+#                 <profile>default</profile>
+#                 <quota>default</quota>
+#             </default>
+#         </users>
+#     </yandex>
+# ---
+# apiVersion: v1
+# kind: ConfigMap
+# metadata:
+#   name: clickhouse-server-config
+#   namespace: pezzo
+# data:
+#   config.xml: |
+#     <yandex>
+#         <listen_host>0.0.0.0</listen_host>
+#         <http_port>8123</http_port>
+#         <tcp_port>9000</tcp_port>
+#         <interserver_http_port>9009</interserver_http_port>
+#     </yandex> 

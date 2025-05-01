@@ -20,12 +20,10 @@ export const useProjectOverviewMetrics = () => {
       }
     );
 
-  const requests = useMetric(DeltaMetricType.TotalRequests);
-  const cost = useMetric(DeltaMetricType.TotalCost);
-  const avgExecutionDuration = useMetric(
-    DeltaMetricType.AverageRequestDuration
-  );
-  const successRate = useMetric(DeltaMetricType.SuccessResponses);
+  const requests = undefined // useMetric(DeltaMetricType.TotalRequests);
+  const cost = undefined // useMetric(DeltaMetricType.TotalCost);
+  const avgExecutionDuration = undefined // useMetric(DeltaMetricType.AverageRequestDuration  );
+  const successRate = undefined // useMetric(DeltaMetricType.SuccessResponses);
 
   return {
     requests,

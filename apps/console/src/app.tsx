@@ -145,10 +145,10 @@ export function App() {
                   </Suspense>
                 }
               >
-                <Route index element={<DashboardPage />} />
+                <Route index element={<PromptsPage />} />
                 <Route path="environments" element={<EnvironmentsPage />} />
-                <Route path={"dashboard"} element={<DashboardPage />} />
-                <Route path={"requests"} element={<RequestsPage />} />
+                {/* <Route path={"dashboard"} element={<DashboardPage />} /> */}
+                {/* <Route path={"requests"} element={<RequestsPage />} /> */}
                 <Route path="prompts" element={<PromptsPage />} />
                 <Route path="prompts/:promptId" element={<PromptPage />}>
                   <Route index element={<Navigate to="edit" />} />

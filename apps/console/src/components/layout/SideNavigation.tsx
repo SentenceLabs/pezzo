@@ -19,18 +19,18 @@ export const SideNavigation = () => {
   const { organizationId } = useCurrentOrganization();
 
   const projectNavigation = [
-    {
-      name: "Dashboard",
-      href: `/projects/${projectId}`,
-      icon: BarChart2,
-      isActive: (href: string) => window.location.pathname === href,
-    },
-    {
-      name: "Requests",
-      href: `/projects/${projectId}/requests`,
-      icon: RadioIcon,
-      isActive: (href: string) => window.location.pathname.startsWith(href),
-    },
+    // {
+    //   name: "Dashboard",
+    //   href: `/projects/${projectId}`,
+    //   icon: BarChart2,
+    //   isActive: (href: string) => window.location.pathname === href,
+    // },
+    // {
+    //   name: "Requests",
+    //   href: `/projects/${projectId}/requests`,
+    //   icon: RadioIcon,
+    //   isActive: (href: string) => window.location.pathname.startsWith(href),
+    // },
     {
       name: "Prompts",
       href: `/projects/${projectId}/prompts`,

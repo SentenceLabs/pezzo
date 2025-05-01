@@ -1,10 +1,10 @@
 import { Card } from "@pezzo/ui";
-import { SuccessErrorRateChart } from "./charts/SuccessErrorRateChart";
+// import { SuccessErrorRateChart } from "./charts/SuccessErrorRateChart";
 import { ProjectMetricControlsProvider } from "./charts/ProjectMetricContext";
 import { TimeframeSelector } from "~/components/metrics/TimeframeSelector";
 import { TimeframeSelectorProvider } from "~/lib/providers/TimeframeSelectorContext";
-import { StatisticsSection } from "./StatisticsSection";
-import { ExecutionTimeChart } from "./charts/ExecutionTimeChart";
+// import { StatisticsSection } from "./StatisticsSection";
+// import { ExecutionTimeChart } from "./charts/ExecutionTimeChart";
 import { usePageTitle } from "~/lib/hooks/usePageTitle";
 import { RequestFilters } from "~/components/requests/RequestFilters";
 import { useFiltersAndSortParams } from "~/lib/hooks/useFiltersAndSortParams";
@@ -37,7 +37,7 @@ export const DashboardPage = () => {
         </div>
       </div>
       <div className="container space-y-6 p-6">
-        <StatisticsSection />
+        {/* <StatisticsSection /> */}
         <div className="grid grid-cols-12 gap-6">
           <Card className="col-span-6 p-6">
             <div className="mb-4 text-muted-foreground">
@@ -45,7 +45,7 @@ export const DashboardPage = () => {
             </div>
             <div className="h-[360px]">
               <ProjectMetricControlsProvider>
-                <SuccessErrorRateChart />
+                {/* <SuccessErrorRateChart /> */}
               </ProjectMetricControlsProvider>
             </div>
           </Card>
@@ -56,7 +56,7 @@ export const DashboardPage = () => {
 
             <div className="h-[360px]">
               <ProjectMetricControlsProvider>
-                <ExecutionTimeChart />
+                {/* <ExecutionTimeChart /> */}
               </ProjectMetricControlsProvider>
             </div>
           </Card>
